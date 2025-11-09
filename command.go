@@ -5,18 +5,18 @@ import (
 	"io"
 	"strings"
 
-	yup "github.com/gloo-foo/framework"
+	gloo "github.com/gloo-foo/framework"
 )
 
-type command yup.Inputs[yup.File, flags]
+type command gloo.Inputs[gloo.File, flags]
 
-func Wc(parameters ...any) yup.Command {
-	return command(yup.Initialize[yup.File, flags](parameters...))
+func Wc(parameters ...any) gloo.Command {
+	return command(gloo.Initialize[gloo.File, flags](parameters...))
 }
 
-func (p command) Executor() yup.CommandExecutor {
-	return yup.Inputs[yup.File, flags](p).Wrap(
-		yup.AccumulateAndOutput(func(lines []string, stdout io.Writer) error {
+func (p command) Executor() gloo.CommandExecutor {
+	return gloo.Inputs[gloo.File, flags](p).Wrap(
+		gloo.AccumulateAndOutput(func(lines []string, stdout io.Writer) error {
 		var lineCount, wordCount, charCount, byteCount, maxLength int
 
 		for _, line := range lines {
